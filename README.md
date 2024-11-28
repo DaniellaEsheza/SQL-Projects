@@ -23,16 +23,16 @@ The dataset used in this project includes detailed information on company layoff
 
 When cleaning data, the following steps are typically necessary:
 
-1. Identifying and removing duplicates.
-2. Standardizing data and correcting any errors.
+1. Identifying and removing duplicates
+2. Standardizing data and correcting any errors
 3. Handling NULL values and  identifying inconsistent entries to improve data quality
 4. Removing Unnecessary Columns or Rows
 
-## 1. Identifying and Removing Duplicates
+### 1. Identifying and Removing Duplicates
 
 - Before starting the cleaning process, creating a staging table with the same data is essential to avoid modifying the original raw dataset.
 
-### Create/Insert data into staging
+#### Create/Insert data into staging
 
 ```sql
 CREATE TABLE layoffs_staging
@@ -42,7 +42,7 @@ INSERT INTO layoffs_staging
 SELECT *
 FROM layoffs;
 ```
-### Identifying duplicates if any
+#### Identifying duplicates if any
 
 - Since there is no unique identifying column, a row number will be generated to match against all columns.
 ```sql
@@ -64,7 +64,7 @@ SELECT*
 FROM duplicate_cte
 WHERE row_num > 1;
 ```
-### Removing duplicates
+#### Removing duplicates
 
 - Since a DELETE statement functions similarly to an UPDATE statement and a CTE cannot be updated, a staging2 database will be created to delete rows where the row number equals 2.
 ```sql
@@ -114,11 +114,11 @@ DELETE
 FROM layoffs_staging2
 WHERE row_num > 1;
 ```
-## 2. Standardizing Data
+### 2. Standardizing Data
 
 -  Inconsistent data formats can lead to errors in analysis. Standardization ensures consistency in data entries by trimming whitespace, standardizing industry names, managing location data, and formatting date fields.
 
-### Standardize company names by trimming spaces
+#### Standardize company names by trimming spaces
 ```sql
 UPDATE layoffs_staging2
 SET company = TRIM(company);
@@ -128,7 +128,7 @@ SET company = TRIM(company);
 SELECT company, TRIM(company)
 FROM layoffs_staging2;
 ```
-### Standardizing industry names
+#### Standardizing industry names
 
 - Identifying industry names.
 ```sql
@@ -148,7 +148,7 @@ SELECT DISTINCT country
 FROM layoffs_staging2
 ORDER BY 1;
 ```
-### Standardize country names by trimming unwanted characters
+#### Standardize country names by trimming unwanted characters
 
 - Identifying distinct countries.
 ```sql
@@ -168,7 +168,7 @@ SELECT DISTINCT country, TRIM(TRAILING  '.' FROM country)
 FROM layoffs_staging2
 ORDER BY 1;
 ```
-### Formatting Date Fields
+#### Formatting Date Fields
 
 - Converting  `date` field to a DATE type
 ```sql
@@ -187,7 +187,7 @@ END;
 ALTER TABLE layoffs_staging2
 MODIFY COLUMN date DATE;
 ```
-## 3.  Handling NULL and Inconsistent Values
+### 3.  Handling NULL and Inconsistent Values
 
 - NULL values and inconsistencies can significantly impact the quality of analysis
 ```sql
@@ -239,7 +239,7 @@ FROM layoffs_staging2
 WHERE total_laid_off IS NULL
 AND percentage_laid_off IS NULL;
 ```
-## 4.  Removing Unnecessary Columns or Rows
+### 4.  Removing Unnecessary Columns or Rows
 ```sql
 SELECT*
 FROM layoffs_staging2;
