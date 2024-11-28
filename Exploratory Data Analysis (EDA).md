@@ -1,4 +1,4 @@
-## Exploratory Data Analysis (EDA)
+# SQL Project-Exploratory Data Analysis (EDA)
 
 EDA involves examining and summarizing a dataset to uncover patterns, detect anomalies, test hypotheses, and check assumptions. This exploratory data analysis provides  a comprehensive view of layoffs, highlighting key trends, affected sectors, and contributing companies.
 
