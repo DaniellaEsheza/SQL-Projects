@@ -1,8 +1,7 @@
-
+# SQL Project - Data Cleaning
 ## Project Overview
 
-This project focuses on cleaning and analyzing a dataset related to company layoffs. The primary objectives are to ensure the data is clean and standardized and to conduct exploratory data analysis (EDA) to uncover valuable insights.
-
+This project focuses on cleaning and standardizing a dataset related to company layoffs. The primary objective is to ensure the data is accurate, consistent, and fit for meaningful insights.
 ## Table of Contents
 
 ### 
