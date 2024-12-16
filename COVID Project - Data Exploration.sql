@@ -1,3 +1,5 @@
+Covid 19 Data Exploration 
+       
 -- Selecting all data from the CovidDeaths table, filtering out rows where the continent is NULL
 -- The results are ordered by the third and fourth columns (date and population)
 SELECT * 
